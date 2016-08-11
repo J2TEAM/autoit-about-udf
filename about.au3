@@ -40,7 +40,7 @@ Func _showAboutDialog($softwareName, $version, $author, $copyrightStart = Defaul
 	Local $btnTop = ($website = Default) ? 85 : 115
 
 	#Region ### START Koda GUI section ###
-	Local $FormMain = GUICreate('About', 393, $GUIheight, -1, -1, -1, -1, $hwnd)
+	Local $FormMain = GUICreate('About', 393, $GUIheight, -1, -1, BitXOR($GUI_SS_DEFAULT_GUI, $WS_MINIMIZEBOX), -1, $hwnd)
 	GUISetFont(12, 400, 0, 'Segoe UI')
 	GUICtrlCreateIcon($icon, $iconName, 20, 20, 48, 48)
 	GUICtrlCreateLabel($softwareName, 80, 20, 238, 25)
