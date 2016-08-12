@@ -39,21 +39,26 @@ Func _showAboutDialog($softwareName, $version, $author, $copyrightStart = Defaul
 	Local $GUIheight = ($website = Default) ? 135 : 160
 	Local $btnTop = ($website = Default) ? 85 : 115
 
+	; Width, height
+	If $width = Default Then $width = 393
+	If $height = Default Then $height = $GUIheight
+
 	#Region ### START Koda GUI section ###
-	Local $FormMain = GUICreate('About', 393, $GUIheight, -1, -1, BitXOR($GUI_SS_DEFAULT_GUI, $WS_MINIMIZEBOX), -1, $hwnd)
+	Local $FormAbout = GUICreate('About', $width, $height, -1, -1, BitXOR($GUI_SS_DEFAULT_GUI, $WS_MINIMIZEBOX), -1, $hwnd)
 	GUISetFont(12, 400, 0, 'Segoe UI')
 	GUICtrlCreateIcon($icon, $iconName, 20, 20, 48, 48)
 	GUICtrlCreateLabel($softwareName, 80, 20, 238, 25)
+	GUICtrlSetFont(-1, 12, 600, 0, 'Segoe UI')
 	GUICtrlCreateLabel($copyright, 80, 50, 257, 25)
 
-	If $website <> Default Then
-		Local $labelWebsite = GUICtrlCreateLabel('https://junookyo.blogspot.com/', 80, 80, 222, 25)
+	If $website = Default Then
+		; Prevent GUIGetMsg error
+		Local $labelWebsite = GUICtrlCreateDummy()
+	Else
+		Local $labelWebsite = GUICtrlCreateLabel($website, 80, 80, 222, 25)
 		GUICtrlSetFont(-1, 12, 400, 4, 'Segoe UI')
 		GUICtrlSetColor(-1, 0x0000FF)
 		GUICtrlSetCursor(-1, 0)
-	Else
-		; Prevent GUIGetMsg error
-		Local $labelWebsite = GUICtrlCreateDummy()
 	EndIf
 
 	Local $btnOK = GUICtrlCreateButton('OK', 80, $btnTop, 65, 25, $BS_DEFPUSHBUTTON)
@@ -78,5 +83,5 @@ Func _showAboutDialog($softwareName, $version, $author, $copyrightStart = Defaul
 		EndSwitch
 	WEnd
 
-	GUIDelete($FormMain)
+	GUIDelete($FormAbout)
 EndFunc   ;==>_showAboutDialog
