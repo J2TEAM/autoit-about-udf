@@ -73,7 +73,10 @@ Func _showAboutDialog($softwareName, $version, $author, $copyrightStart = Defaul
 			Case $labelWebsite
 				; Make sure it is an valid URL
 				Local $url = GUICtrlRead($labelWebsite)
-				If StringLeft($url, 4) = 'http' Then ShellExecute($url)
+				If $url Then
+					Local $test = StringLeft($url, 4)
+					If $test = 'http' Or $test = 'www.' Then ShellExecute($url)
+				EndIf
 
 			Case $btnOK
 				ExitLoop
